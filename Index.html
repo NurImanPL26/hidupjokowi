@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="orderForm">
+        <input type="text" name="orderId" placeholder="Order ID" required />
+        <input type="text" name="namaCustomer" placeholder="Nama Customer" required />
+        <input type="text" name="nomorWA" placeholder="Nomor WA" required />
+        <textarea name="alamat" placeholder="Alamat Lengkap" required></textarea>
+        <input type="text" name="produk" placeholder="Produk" required />
+        <input type="text" name="warna" placeholder="Warna" required />
+        <input type="text" name="ukuran" placeholder="Ukuran" required />
+        <button type="submit">Kirim Pesanan</button>
+    </form>
+    
+    <script>
+        const scriptURL = "PASTE_URL_API_DI_SINI"; // ganti dengan URL Web App
+
+        document.getElementById("orderForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = {
+                orderId: this.orderId.value,
+                namaCustomer: this.namaCustomer.value,
+                nomorWA: this.nomorWA.value,
+                alamat: this.alamat.value,
+                produk: this.produk.value,
+                warna: this.warna.value,
+                ukuran: this.ukuran.value
+            };
+
+            fetch(scriptURL, {
+                method: "POST",
+                body: JSON.stringify(formData)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message);
+                    this.reset();
+                })
+                .catch(err => {
+                    alert("Error: " + err);
+                });
+        });
+    </script>
+        </div>
+    </div>
+</body>
+<script>
+
+</script>
+</html>
